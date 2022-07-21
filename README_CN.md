@@ -2,14 +2,15 @@
 
 Socialite 是一个 [OAuth2](https://oauth.net/2/) 认证工具。 它的灵感来源于 [laravel/socialite](https://github.com/laravel/socialite) ， 你可以很轻易的在任何 PHP 项目中使用它。
 
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/overtrue/laravel-socialite?style=flat-square)
-![GitHub License](https://img.shields.io/github/license/overtrue/laravel-socialite?style=flat-square)
-![Packagist Downloads](https://img.shields.io/packagist/dt/overtrue/laravel-socialite?style=flat-square)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/overtrue/socialite?style=flat-square)](https://github.com/overtrue/socialite/releases)
+[![GitHub License](https://img.shields.io/github/license/overtrue/socialite?style=flat-square)](https://github.com/overtrue/socialite/blob/master/LICENSE)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/overtrue/socialite?style=flat-square)](https://packagist.org/packages/overtrue/socialite)
 
 [![Sponsor me](https://github.com/overtrue/overtrue/blob/master/sponsor-me-button-s.svg?raw=true)](https://github.com/sponsors/overtrue)
 
 该工具现已支持平台有：Facebook，Github，Google，Linkedin，Outlook，QQ，TAPD，支付宝，淘宝，百度，钉钉，微博，微信，抖音，飞书，豆瓣，企业微信，腾讯云，Line，Gitee。
 
+- [Socialite](#socialite)
 - [版本要求](#版本要求)
 - [安装](#安装)
 - [使用指南](#使用指南)
@@ -20,6 +21,8 @@ Socialite 是一个 [OAuth2](https://oauth.net/2/) 认证工具。 它的灵感�
     - [支付宝](#支付宝)
     - [钉钉](#钉钉)
     - [抖音](#抖音)
+    - [头条](#头条)
+    - [西瓜](#西瓜)
     - [百度](#百度)
     - [飞书](#飞书)
     - [淘宝](#淘宝)
@@ -321,6 +324,44 @@ $socialite = new SocialiteManager($config);
 $user = $socialite->create('douyin')->userFromCode('here is auth code');
 
 $user = $socialite->create('douyin')->withOpenId('openId')->userFromToken('here is the access token');
+```
+
+### [头条](https://open.douyin.com/platform/resource/docs/develop/permission/toutiao-or-xigua/OAuth2.0/)
+
+> 注意： 使用`头条`服务提供的时候，如果你想直接使用 access_token 获取用户信息时，请先设置 openid。 先调用 `withOpenId()` 再调用 `userFromToken()`
+
+```php
+$config = [
+  'toutiao' => [
+    'client_id' => 'your app id',
+    'client_secret' => 'your app secret',
+    'redirect' => 'redirect URL'
+  ]
+];
+
+$socialite = new SocialiteManager($config);
+
+$user = $socialite->create('toutiao')->userFromCode('here is auth code');
+$user = $socialite->create('toutiao')->withOpenId('openId')->userFromToken('here is the access token');
+```
+
+### [西瓜](https://open.douyin.com/platform/resource/docs/develop/permission/toutiao-or-xigua/OAuth2.0/)
+
+> 注意： 使用`西瓜`服务提供的时候，如果你想直接使用 access_token 获取用户信息时，请先设置 openid。 先调用 `withOpenId()` 再调用 `userFromToken()`
+
+```php
+$config = [
+  'xigua' => [
+    'client_id' => 'your app id',
+    'client_secret' => 'your app secret',
+    'redirect' => 'redirect URL'
+  ]
+];
+
+$socialite = new SocialiteManager($config);
+
+$user = $socialite->create('xigua')->userFromCode('here is auth code');
+$user = $socialite->create('xigua')->withOpenId('openId')->userFromToken('here is the access token');
 ```
 
 

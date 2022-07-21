@@ -2,16 +2,17 @@
 
 Socialite is an [OAuth2](https://oauth.net/2/)  Authentication tool. It is inspired by [laravel/socialite](https://github.com/laravel/socialite), You can easily use it in any PHP project.    [中文文档](/README_CN.md)
 
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/overtrue/laravel-socialite?style=flat-square)
-![GitHub License](https://img.shields.io/github/license/overtrue/laravel-socialite?style=flat-square)
-![Packagist Downloads](https://img.shields.io/packagist/dt/overtrue/laravel-socialite?style=flat-square)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/overtrue/socialite?style=flat-square)](https://github.com/overtrue/socialite/releases)
+[![GitHub License](https://img.shields.io/github/license/overtrue/socialite?style=flat-square)](https://github.com/overtrue/socialite/blob/master/LICENSE)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/overtrue/socialite?style=flat-square)](https://packagist.org/packages/overtrue/socialite)
 
 [![Sponsor me](https://github.com/overtrue/overtrue/blob/master/sponsor-me-button-s.svg?raw=true)](https://github.com/sponsors/overtrue)
 
-This tool now supports platforms such as Facebook, GitHub, Google, LinkedIn, Outlook, QQ, Tapd, Alipay, Taobao, Baidu, DingTalk, Weibo, WeChat, Douyin, Feishu, Douban, WeWork, Tencent Cloud, Line, Gitee.
+This tool now supports platforms such as Facebook, GitHub, Google, Figma, LinkedIn, Outlook, QQ, Tapd, Alipay, Taobao, Baidu, DingTalk, Weibo, WeChat, Douyin, Feishu, Douban, WeWork, Tencent Cloud, Line, Gitee.
 
 如果你喜欢我的项目并想支持它，[点击这里 :heart:](https://github.com/sponsors/overtrue)
 
+- [Socialite](#socialite)
 - [Requirement](#requirement)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -22,6 +23,8 @@ This tool now supports platforms such as Facebook, GitHub, Google, LinkedIn, Out
     - [Alipay](#alipay)
     - [DingTalk](#dingtalk)
     - [Douyin](#douyin)
+    - [TouTiao](#toutiao)
+    - [XiGua](#xigua)
     - [Baidu](#baidu)
     - [Feishu](#feishu)
     - [Taobao](#taobao)
@@ -40,6 +43,7 @@ This tool now supports platforms such as Facebook, GitHub, Google, LinkedIn, Out
     - [Get user with access token](#get-user-with-access-token)
 - [Enjoy it! :heart:](#enjoy-it-heart)
 - [Reference](#reference)
+  - [Project supported by JetBrains](#project-supported-by-jetbrains)
 - [PHP 扩展包开发](#php-扩展包开发)
 - [License](#license)
 
@@ -310,6 +314,44 @@ $user = $socialite->create('douyin')->userFromCode('here is auth code');
 $user = $socialite->create('douyin')->withOpenId('openId')->userFromToken('here is the access token');
 ```
 
+### [TouTiao](https://open.douyin.com/platform/resource/docs/develop/permission/toutiao-or-xigua/OAuth2.0/)
+
+> Note： using the `toutiao` create that if you get user information directly using access token, set up the openid first. the openid can be obtained by code when access is obtained, so call `userFromCode()` automatically configured for you openid, if call `userFromToken()` first call `withOpenId()`
+
+```php
+$config = [
+  'toutiao' => [
+    'client_id' => 'your app id',
+    'client_secret' => 'your app secret',
+    'redirect' => 'redirect URL'
+  ]
+];
+
+$socialite = new SocialiteManager($config);
+
+$user = $socialite->create('toutiao')->userFromCode('here is auth code');
+$user = $socialite->create('toutiao')->withOpenId('openId')->userFromToken('here is the access token');
+```
+
+### [XiGua](https://open.douyin.com/platform/resource/docs/develop/permission/toutiao-or-xigua/OAuth2.0/)
+
+> Note： using the `xigua` create that if you get user information directly using access token, set up the openid first. the openid can be obtained by code when access is obtained, so call `userFromCode()` automatically configured for you openid, if call `userFromToken()` first call `withOpenId()`
+
+```php
+$config = [
+  'xigua' => [
+    'client_id' => 'your app id',
+    'client_secret' => 'your app secret',
+    'redirect' => 'redirect URL'
+  ]
+];
+
+$socialite = new SocialiteManager($config);
+
+$user = $socialite->create('xigua')->userFromCode('here is auth code');
+$user = $socialite->create('xigua')->withOpenId('openId')->userFromToken('here is the access token');
+```
+
 
 ### [Baidu](https://developer.baidu.com/wiki/index.php?title=docs/oauth)
 
@@ -556,7 +598,8 @@ $user = $socialite->userFromToken($accessToken);
 - [Alipay - 用户信息授权](https://opendocs.alipay.com/open/289/105656)
 - [DingTalk - 扫码登录第三方网站](https://ding-doc.dingtalk.com/doc#/serverapi3/mrugr3)
 - [Google - OpenID Connect](https://developers.google.com/identity/protocols/OpenIDConnect)
-- [Github - Authorizing OAuth Apps](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)
+- [GitHub - Authorizing OAuth Apps](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)
+- [Figma - OAuth 2](https://www.figma.com/developers/api#auth-oauth2)
 - [Facebook - Graph API](https://developers.facebook.com/docs/graph-api)
 - [Linkedin - Authenticating with OAuth 2.0](https://developer.linkedin.com/docs/oauth2)
 - [微博 - OAuth 2.0 授权机制说明](http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E)
